@@ -1,0 +1,11 @@
+---
+- name: reboot remote hosts
+  hosts: fedora
+  gather_facts: no
+
+  tasks:
+  - shell: cat /home/willian/text.yml
+    register: result
+  
+  - debug:
+      var: result

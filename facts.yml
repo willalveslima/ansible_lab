@@ -1,0 +1,15 @@
+---
+- name: reboot remote hosts
+  hosts: all
+  strategy: free
+  gather_facts: yes
+
+  tasks:
+  
+  - debug:
+      msg:
+        - "{{ ansible_facts['distribution'] }}"
+        - "{{ ansible_facts['distribution_major_version'] }}"
+        - "{{ ansible_facts['distribution_release'] }}"
+        - "{{ ansible_facts['distribution_version'] }}"
+        - "{{ ansible_facts['lsb']['description'] }}"      

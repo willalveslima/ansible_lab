@@ -1,0 +1,17 @@
+---
+- name: List Inv
+  hosts: all
+  gather_facts: yes
+
+  tasks:
+  
+  - name: show all the hosts inventory_hostnames
+    debug:
+      msg: "{{ item }}"
+    loop: "{{ query('inventory_hostnames', 'all') }}"
+
+  - name: show all the hosts in the inventory
+    debug:
+      msg: "{{ item }}"
+    loop: "{{ groups['all'] }}"    
+

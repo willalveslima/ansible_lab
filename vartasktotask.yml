@@ -1,0 +1,13 @@
+---
+- name: reboot remote hosts
+  hosts: all
+  #  strategy: free
+  gather_facts: yes
+
+  tasks:
+  - set_fact:
+      variavel: "{{ ansible_facts['distribution'] }}"
+               
+  - debug:
+      msg:
+        - "{{ variavel }}"

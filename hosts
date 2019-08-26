@@ -4,3 +4,9 @@
 192.168.56.103
 [webserver]
 192.168.56.102
+[vagrant]
+msqldb ansible_host=192.168.50.101 ansible_ssh_private_key_file=~/ansible_lab/sshkeys/id_mysqldb
+phpweb ansible_host=192.168.50.102 ansible_ssh_private_key_file=~/ansible_lab/sshkeys/id_phpweb
+[vagrant:vars]
+ansible_ssh_user=vagrant 
+

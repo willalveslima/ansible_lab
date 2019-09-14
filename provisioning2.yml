@@ -1,0 +1,9 @@
+---
+- hosts: all
+  tasks:
+    - name: 'Instala o PHP, apache e lib'
+      apt:
+        name: [php7.2,apache2,libapache2-mod-php7.2]
+        state: latest
+      become: yes
+    

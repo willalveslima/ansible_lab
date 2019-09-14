@@ -5,8 +5,16 @@
 [webserver]
 192.168.56.102
 [vagrant]
-msqldb ansible_host=192.168.50.101 ansible_ssh_private_key_file=~/ansible_lab/sshkeys/id_mysqldb
-phpweb ansible_host=192.168.50.102 ansible_ssh_private_key_file=~/ansible_lab/sshkeys/id_phpweb
+msqldb ansible_host=192.168.50.101 
+phpweb ansible_host=192.168.50.102 
+mysqlserver ansible_host=192.168.50.103
+ansible ansible_host=192.168.50.104
+memcached ansible_host=192.168.50.105
+dockerhost ansible_host=192.168.50.106
+ansiblePHP ansible_host=192.168.50.107
 [vagrant:vars]
-ansible_ssh_user=vagrant 
+ansible_ssh_user=vagrant
+ansible_ssh_private_key_file=./sshkeys/id_wsl
+ansible_python_interpreter=/usr/bin/python3
+ansible_ssh_common_args='-o StrictHostKeyChecking=no' 
 

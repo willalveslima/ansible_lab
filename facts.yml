@@ -1,7 +1,7 @@
 ---
 - name: reboot remote hosts
   hosts: all
-  strategy: free
+  #strategy: free
   gather_facts: yes
 
   tasks:

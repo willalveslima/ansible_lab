@@ -11,7 +11,18 @@ mysqlserver ansible_host=192.168.50.103
 ansible ansible_host=192.168.50.104
 memcached ansible_host=192.168.50.105
 dockerhost ansible_host=192.168.50.106
-ansiblePHP ansible_host=192.168.50.107
+wordpress01 ansible_host=192.168.50.107
+mysql01 ansible_host=192.168.50.108
+
+[wp_php]
+wordpress01
+[wp_database]
+mysql01
+
+[wordpress:children]
+wp_php
+wp_database
+
 [vagrant:vars]
 ansible_ssh_user=vagrant
 ansible_ssh_private_key_file=./sshkeys/id_wsl

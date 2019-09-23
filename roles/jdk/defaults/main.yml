@@ -1,0 +1,4 @@
+---
+  jdk:
+    pasta: /opt/jdk
+    file: jdk-8u221-linux-i586.tar.gz

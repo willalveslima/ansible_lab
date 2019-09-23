@@ -1,0 +1,60 @@
+---
+- name: Instala 32-bit libraries Ubuntu 64
+  apt:
+    name: libc6-i386
+    update_cache: yes
+  become: yes
+- name: Cria Pasta jdk
+  file:
+    path: "{{ jdk.pasta }}"
+    state: directory
+  become: yes
+
+- name: Extrai jdk
+  unarchive:
+    src: "files/{{ jdk.file }}"
+    dest: "{{ jdk.pasta }}"
+  become: yes
+
+- name: verifica nome da pasta jdk descompactada
+  find:
+    paths: "{{ jdk.pasta }}"
+    recurse: no
+    file_type: directory
+  register: pastaInstalacao
+
+- debug:
+    msg: "{{ pastaInstalacao.files.0.path }}"
+
+- name: configura JAVA-HOME
+  blockinfile:
+    path: /etc/profile
+    block: |
+      JAVA_HOME={{ pastaInstalacao.files.0.path }}
+      PATH=$PATH:$JAVA_HOME/bin
+      export JAVA_HOME
+      export PATH
+  become: yes
+
+- name: reload environment.
+  shell: . /etc/profile
+  become: yes
+
+- name: configura default java na maquina.
+  shell: "{{ item }}"
+  with_items:
+    - update-alternatives --install "/usr/bin/java" "java" "{{ pastaInstalacao.files.0.path }}/bin/java" 1
+    - update-alternatives --install "/usr/bin/javac" "javac" "{{ pastaInstalacao.files.0.path }}/bin/javac" 1
+    - update-alternatives --install "/usr/bin/javaws" "javaws" "{{ pastaInstalacao.files.0.path }}/bin/javaws" 1
+    - update-alternatives --set java {{ pastaInstalacao.files.0.path }}/bin/java
+    - update-alternatives --set javac {{ pastaInstalacao.files.0.path }}/bin/javac
+    - update-alternatives --set javaws {{ pastaInstalacao.files.0.path }}/bin/javaws
+  become: yes
+
+- name: testa java.
+  shell: java -version
+  register: javaVersion
+
+- debug: msg="{{ javaVersion.stdout }}"
+
+- debug: msg="{{ javaVersion.stderr }}"

@@ -1,6 +1,5 @@
 ---
 - hosts: jenkins
   roles:
-    - jdk
-
+    - jenkins2
 

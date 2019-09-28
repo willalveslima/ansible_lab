@@ -1,0 +1,6 @@
+---
+- name: Instala maven
+  apt:
+    name: maven
+    update_cache: yes
+  become: yes

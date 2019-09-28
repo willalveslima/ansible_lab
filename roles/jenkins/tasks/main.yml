@@ -1,0 +1,17 @@
+---
+- name: 'Cria Diretorio /opt/jenkins'
+  file:
+    path: /opt/jenkins
+    state: directory
+  become: yes
+
+
+- name: 'Baixa jenkins'
+  get_url:
+    url: 'http://mirrors.jenkins.io/war-stable/latest/jenkins.war'
+    dest: '/opt/jenkins/jenkins.war'
+  become: yes
+
+- name: 'executa Jenkins'
+  shell: java -jar /opt/jenkins/jenkins.war -Djava.awt.headless=true --httpPort=8088 
+  become: yes

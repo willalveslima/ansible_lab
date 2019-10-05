@@ -1,0 +1,22 @@
+---
+- hosts: jenkins
+  roles:
+    - tomcat
+
+  handlers:
+    - name: restart jenkins
+      service:
+        name: jenkins
+        state: restarted
+      become: yes
+  
+  tasks:
+
+    - name: Altera porta http 8180
+      lineinfile:
+        path: /etc/default/jenkins
+        regexp: '^HTTP_PORT='
+        line: HTTP_PORT=8180
+      become: yes
+      notify:
+        - restart jenkins

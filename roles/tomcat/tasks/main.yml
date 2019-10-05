@@ -2,7 +2,7 @@
 - name: Instala tomcat via apt
   apt:
     name: tomcat9
-    update_cache: yes
+  #  update_cache: yes
   notify: 
     - Start tomcat
   become: yes
